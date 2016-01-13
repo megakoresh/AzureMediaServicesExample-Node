@@ -1,0 +1,50 @@
+//
+   Created by HauskaNimi on 5.10.2015.
+   TODO: This is kind of proof of concept thing. It detects inconsistencies between index and Azure Media Services and reports 
+   them and you can select what to do with them. I am not that good at writing complex tests to properly implement this without an active userbase.
+extends ../layout.jade
+
+block actions
+  select.actions
+    option(value="fill" alt="Create a new index for an asset") Fill
+    option(value="remove" alt="Remove an asset without index") Remove
+    option(value="match" alt="Associate an asset with the selected suggested index") Match
+
+block body
+  if issues
+    h4 #{issues.invalidIndexes.length} invalid index(es) found in the database. These don't have corresponding assets on azure.
+    table#listing
+      thead
+        td Azure asset (#{issues.count} unindexed assets found)
+        td Suggested index(only invalid indexes are used)
+        td Actions
+      each discrepancy in issues.discrepancies
+        tr(id=discrepancy.asset.Id)
+          td= discrepancy.asset.Name
+          td
+            select.suggestions
+              if discrepancy.suggestions.length > 0
+                each suggestion in discrepancy.suggestions
+                  option(value=suggestion.id)= suggestion.title
+              option(value="None" alt="Select this to create a new index for fill operation") None
+
+          td
+            block actions
+    button#save Save
+  else
+    h3 All good, son
+    p Looks like no errors have been found
+  script.
+    document.getElementById("save").click(function(e){
+      var table = document.getElementById('listing');
+      var rows = table.getElementsByTagName('tr');
+      var data = [];
+      rows.forEach(function(row){
+        var entry = {};
+        //TODO: get this shit associated
+      });
+      var xhr = new XMLHttpRequest();
+      xhr.open('POST', window.location.hostname+'asset/fixIssues', true);
+      xhr.setRequestHeader("X-Requested-With", "XMLHttpRequest");
+      xhr.send(data);
+    });

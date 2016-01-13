@@ -1,0 +1,20 @@
++navlist(navlist) //local "navlist" is passed by the buildNavList policy
+
+mixin navlist(navlist)
+  ul.menu.vertical(data-accordion-menu)
+    for link, action in actions
+      li: a(href=link)= action
+    if(!_.isEmpty(navlist))
+      +createMenuFromObject(navlist)
+
+mixin createMenuFromObject(obj)
+  each entry, index in obj
+    if(typeof entry === 'object' && !entry.assetId)
+      li.has-submenu
+        a(href="/asset/list?category="+index tabindex="0")= index
+        ul.menu.vertical.nested(data-submenu)
+          +createMenuFromObject(entry)
+    else if(typeof entry === 'object' && entry.assetId)
+      li: a(href='/asset/play?assetId='+entry.assetId)= entry.title
+    else
+      li: a(href="#error")= index

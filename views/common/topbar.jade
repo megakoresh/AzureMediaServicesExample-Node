@@ -1,0 +1,30 @@
+//
+   Created by HauskaNimi on 25.11.2015.
+
+.top-bar.row
+  .top-bar-left
+    ul.menu.row(style="margin-left: 0")
+      li.small-3.columns.hide-for-large: button.menu-icon(type="button" data-toggle='navmenu')
+      li.small-9.large-12.small-centered.columns: h4 Website name
+  .top-bar-right
+    if(req.session.user)
+      ul.dropdown.menu(data-dropdown-menu)
+        li.has-submenu
+          a(href='#') Username
+          ul.submenu.menu.vertical(data-submenu)
+            li: a(href='#') My content
+            li: a(href='#') My comments
+            li: a(href='#') Bookmarks
+            li: a(href='#') Logout
+        li: button.menu-icon(type="button" data-open='infobar')
+    else
+      form.small-12.columns(method="post" action="/login") //TODO: implement...
+        ul.menu.row
+          li.small-9.columns.large-push-3
+            ul.menu.vertical.medium-horizontal.input-group.small-centered
+              li: input.input-group-field(type='text', placeholder='username')
+              li: input.input-group-field(type='password', placeholder='password')
+              li: input.success.button#logmein(type='submit' value="Login")
+          li.small-3.columns.hide-for-large
+            button.show-for-medium.button(type="button" data-toggle='extra' style="width:100%") Display info
+            button.show-for-small-only.menu-icon(type="button" data-toggle='extra')

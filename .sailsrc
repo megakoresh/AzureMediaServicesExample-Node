@@ -1,0 +1,15 @@
+{
+  "generators": {
+    "modules": {}
+  },
+  "commands": {
+	"deploy": {
+		"module": "sails-deploy-azure"
+	}
+	},
+  "azure": {
+    "sitename": "AZURE WEBSITES SITE NAME",
+    "username": "DEPLOYMENT USER NAME",
+    "password": "DEPLOYMENT USER PASSWORD"
+  }
+  }

@@ -1,0 +1,64 @@
+@import 'foundation';
+
+body {
+  height: auto;
+}
+
+ul.js-dropdown-active {
+  left:0 !important;
+}
+
+@media screen and (max-width: 39.9375em) and (min-width: 0em) {
+  .media-object.stack-for-small .media-object-section img {
+    width: initial;
+  }
+}
+
+@media screen and (max-width: 60em) {
+  .top-bar-right {
+    float: none;
+  }
+}
+
+@media screen and (min-width: 75em) {
+  .position-left.reveal-for-large ~ .off-canvas-content {
+    margin-left: 235px;
+  }
+}
+
+.media-object {
+  .media-object-section {
+    vertical-align: middle;
+  }
+  .thumbnail {
+    display: inline-block;
+  }
+  img {
+    max-height: 9rem;
+    max-width: 16rem;
+    width: auto;
+    height: auto;
+  }
+}
+
+.row {
+  max-width: 125rem;
+}
+
+.top-bar input {
+  width: 100%;
+}
+
+button.menu-icon[data-open="infobar"] {
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+}
+
+.off-canvas-content {
+  box-shadow: none;
+}
+
+.input-group-label, .input-group-field, .input-group-button {
+  line-height: 100%;
+}

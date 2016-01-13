@@ -1,0 +1,5 @@
+node_modules/
+.tmp/
+.editorconfig
+.idea/
+config/local.js

@@ -1,0 +1,16 @@
+div(data-off-canvas-content)
+  form.small-12.small-centered.columns(action="/asset/save")
+    input(type="hidden" name="assetId" value=media.assetId style="display:none")
+    H3 Now editing: #{media.title}
+    label.small-10.small-centered.columns(for="title")
+      h5 Title
+      input(type="text" name="title" id="title" placeholder=media.title)
+    fieldset.small-12.medium-10.small-centered.columns
+      h5 Your video desription
+      textarea(name="description" rows=5)= media.description || 'No description'
+    label.small-12.medium-6.small-centered.columns.row
+      input.button.success.small-12.columns(type="submit" value="Save" id="submit")
+  form.small-12.small-centered.columns#deleteVideo(action="/asset/delete" method='post')
+    input(type="hidden" name="assetId" value=media.assetId style="display:none")
+    label.small-12.medium-6.small-centered.columns.row
+      input.button.alert.small-12.columns(type="submit" value="Delete the video" id="submit")

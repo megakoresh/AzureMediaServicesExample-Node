@@ -1,0 +1,93 @@
+$panel-color: rgb(221, 241, 226);
+$background-color: #fff;
+
+@mixin generateDelays(
+  $childrenCount,
+  $duration: 1s
+){
+  @for $i from 1 through $childrenCount {
+    & :nth-child(#{$i}){
+      animation-delay: -($duration*($i*0.5));
+    }
+  }
+}
+
+footer.logo {
+  position: fixed;
+  right: 2rem;
+  bottom: 2rem;
+  max-width: 7rem;
+  display: block;
+  img {
+    width: 100%;
+  }
+}
+
+
+@media screen and (max-width: 40em) {
+  footer.logo {
+    max-width: 3rem;
+    z-index: -1;
+    opacity: 0.5;
+  }
+}
+
+form#upload {
+  margin-left: 50%;
+  transform: translateX(-50%);
+  margin-top: 5rem;
+  max-width: 35rem;
+  max-height: 50rem;
+  min-height: auto;
+  padding: 1.5rem;
+  box-shadow: none;
+  border-radius: 5rem;
+  background-color: rgba(130, 198, 124, 0.55);
+  #filefield {
+    display: flex;
+    align-items: center;
+    border: 2px dashed black;
+    min-height: 8rem;
+  }
+}
+
+tr.comment {
+  vertical-align: baseline;
+}
+
+#extra {
+  //top: 3.7rem;
+}
+
+.off-canvas {
+   background-color: $panel-color;
+}
+
+.top-bar, .top-bar ul{
+  background-color: $panel-color;
+}
+
+#download {
+  @include generateDelays(4, 3s);
+  height: 2.4rem;
+  li {
+    animation: loop 0.7s infinite;
+    display: inline-block;
+    width: 13px;
+    background: #48e295;
+    height: 20px;
+    position: relative;
+  }
+}
+
+@keyframes loop {
+  0% {
+    transform: scaleY(1);
+  }
+  50%{
+    transform: scaleY(0.6);
+  }
+  100%{
+    transform: scaleY(1);
+  }
+}

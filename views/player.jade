@@ -1,0 +1,62 @@
+//
+   Created by HauskaNimi on 7.10.2015.
+extends ./layout
+
+block cdnstyles
+  link(href="//amp.azure.net/libs/amp/latest/skins/amp-default/azuremediaplayer.min.css" rel="stylesheet")
+block cdnscripts
+  script(src= "//amp.azure.net/libs/amp/latest/azuremediaplayer.min.js")
+  script.
+    window.media = !{JSON.stringify(media)};
+    window.playerSettings = !{JSON.stringify(settings || {})};
+    window.playbackUrl = !{JSON.stringify(url || null)};
+
+block nav
+  include ./common/sidebar.jade
+
+block body
+  -
+    if(!media.comments || media.comments.length==0){
+      media.comments = [];
+      media.comments.push({
+        author: 'GodOfMedia',
+        text: 'Praise be to the god of media. Let his light shine bright on thy assets. Respect and pray to the GodOfMedia for thy videos to encode well and audio to stay clean and it shall.',
+        updatedAt: '2015-12-14T08:30:01.333Z'
+      });
+    }
+  .row.off-canvas-content(data-off-canvas-content)
+    h3.small-12.columns(style="float:none")=media.title
+    video(
+      autoplay
+      controls
+      class="azuremediaplayer amp-default-skin small-12 small-centered columns"
+      id=(media)?media.assetId:'error'
+      style="z-index: 1")
+    .small-12.medium-6.columns
+      ul.menu
+        li: a.button(data-open="editmodal") Edit video
+        li: a.button(data-open="extra") Encoding progress
+        //if(req.session.user == media.author)
+        li: a.button#download(data-toggle="download-tip") Download original video
+        .dropdown-pane#download-tip(data-dropdown data-hover="true").
+          Right click and select "Save as" once the tab is opened to download video.
+    .small-12.columns
+      h5 Comment section
+      h6.subheader This is an example comment
+      table.hover
+        tbody
+          each comment in media.comments
+            tr.comment
+              td=comment.author
+              td=comment.text
+              td='Last edited on: \n'+moment(comment.updatedAt).format('DD.MM.YYYY')+' \nby '+comment.author  
+block extra
+  .reveal.medium#editmodal(data-reveal data-overlay="true" data-close-on-click='true' data-animation-in='hinge-in-from-top' data-animation-out='hinge-out-from-top')
+    include ./edit.jade
+    button.close-button(data-close aria-label="Close the edit form" type="button")
+      span(aria-hidden="true") &times;
+  .reveal.medium#extra(data-reveal data-overlay="true" data-close-on-click='true' data-animation-in='hinge-in-from-top' data-animation-out='hinge-out-from-top')
+    h6 Encoding progress
+    #info
+    button.close-button(data-close aria-label="Close info panel" type="button")
+      span(aria-hidden="true") &times;

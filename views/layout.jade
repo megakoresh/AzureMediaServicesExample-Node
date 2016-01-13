@@ -1,0 +1,37 @@
+-
+  function getRandomInt(min, max) {
+    return Math.floor(Math.random() * (max - min + 1)) + min;
+  }
+doctype html
+html
+  head
+    title= 'Azure Media Node.js Video on Demand service'
+    meta(name="viewport",content="width=device-width, initial-scale=1, maximum-scale=1")
+    // STYLES
+    link(rel="stylesheet", href="/styles/importer.css")
+    link(rel="stylesheet", href="/styles/overrides.css")
+    link(rel="stylesheet", href="/styles/style.css")
+    // STYLES END
+    block cdnstyles
+    block styles
+
+  body
+    include ./common/topbar.jade
+    .off-canvas-wrapper.row(style="height:inherit")
+      .off-canvas-wrapper-inner.small-12.columns(data-off-canvas-wrapper style="height:inherit")
+        .off-canvas.position-left.reveal-for-large#navmenu(data-off-canvas style="position:absolute; height: 100%")
+          block nav
+        .off-canvas-content(data-off-canvas-content)
+          block body
+        block extra
+        footer.logo
+          img(src=logos[getRandomInt(0, 2)]) //get one of your logos from the global locals
+    // SCRIPTS
+    script(src="/js/dependencies/sails.io.js")
+    script(src="/js/dependencies/foundation.js")
+    script(src="/js/dependencies/underscore.js")
+    script(src="/js/clientsockets.js")
+    script(src="/js/ui.js")
+    // SCRIPTS END
+    block cdnscripts
+    block privatescripts

@@ -1,0 +1,31 @@
+extends ./layout
+
+block nav
+  include ./common/sidebar.jade
+
+block body
+  .small-12.large-7.columns
+    each category in videos
+      each video, index in category
+        .media-object.stack-for-small.row
+            .media-object-section
+              a.thumbnail(href="/Asset/Play?assetId="+video.assetId)
+                img(src=(video.thumbnail || "/images/nothumbnail.jpg") style='width:auto')
+            .media-object-section
+              h4: a(href="/Asset/Play?assetId="+video.assetId)= video.title
+              span(class="permission-"+video.permission.toString()) //TODO: icomoon icon font doesn't seem to work and display the appropriate icon...
+              if(video.description)
+                p= video.description
+              ul.info.menu.vertical
+                li
+                  b Category:
+                  span=' '+video.categoryFullName
+                li
+                  b By
+                  span=' '+video.authorFullName
+                li
+                  b Added
+                  span=' '+moment(video.createdAt).format('ddd, MMMM Do YYYY [at] HH:mm')
+
+block extra
+  include ./common/right.jade

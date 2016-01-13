@@ -1,0 +1,64 @@
+extends ./layout
+
+block nav
+  include ./common/sidebar.jade
+
+block body
+  form.small-12.medium-6.small-centered.columns#upload(enctype="multipart/form-data" action="/asset/add")
+    label.small-10.small-centered.columns(for="title")
+      .input-group
+        h5.input-group-label Title
+        input.input-group-field(type="text" name="title" id="title")
+    label.small-12.medium-10.small-centered.columns#filefield(for="file")
+      .input-group
+        h5.input-group-field.text-center Drag your file here or click this area
+    fieldset.small-10.small-centered.columns#trim(style="display:none")
+      .slider.small-12.columns
+        span.slider-handle(data-slider-handle role='slider' aria-controls='startsAt')
+        span.slider-fill(data-slider-fill)
+      .input-group
+        span.input-group-label Start at (seconds)
+        input.input-group-field#startsAt(type='number' name='startsAt')
+      .slider.small-12.columns
+        span.slider-handle(data-slider-handle role='slider' aria-controls='endsAt')
+        span.slider-fill(data-slider-fill)
+      .input-group
+        span.input-group-label End at (seconds)
+        input.input-group-field#endsAt(type='number' name='endsAt')
+    label.row
+      input.button.small-12.medium-6.columns(type="submit" value="Upload!" id="submit" style="margin-left:25%")
+  input(type="file" id="file" name="file" style="display: none")
+
+block extra
+  include ./common/right.jade
+
+block privatescripts
+  script(src="/js/private/upload.js")
+
+//
+  TODO: trim sliders
+  This is how it should be done. However for now, it is not possible due to a bug in Foundation. Once it's fixed,
+  I must update the markup.
+  .slider.small-12.columns#sliders
+    span.slider-handle(data-slider-handle role='slider' aria-controls='startsAt')
+    span.slider-fill(data-slider-fill)
+    span.slider-handle(data-slider-handle role='slider' aria-controls="endsAt")
+  .input-group
+    span.input-group-label Start at (seconds)
+    input.input-group-field#startsAt(type='number' name='startsAt')
+  .input-group
+    span.input-group-label End at (seconds)
+    input.input-group-field#endsAt(type='number' name='endsAt')
+
+  .slider.small-12.columns
+    span.slider-handle(data-slider-handle role='slider' aria-controls='startsAt')
+    span.slider-fill(data-slider-fill)
+  .input-group
+    span.input-group-label Start at (seconds)
+    input.input-group-field#startsAt(type='number' name='startsAt')
+  .slider.small-12.columns
+    span.slider-handle(data-slider-handle role='slider' aria-controls='endsAt')
+    span.slider-fill(data-slider-fill)
+  .input-group
+    span.input-group-label End at (seconds)
+    input.input-group-field#endsAt(type='number' name='endsAt')
