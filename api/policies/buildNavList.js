@@ -9,7 +9,7 @@ module.exports = function(req, res, next){
         sails.log.verbose('Building navlist');
         var fullNames = utilService.fillFullNames(assets);
         req.options.locals = req.options.locals || {};
-        req.options.locals.navlist = utilService.sortByProperty(fullNames, 'categoryFullName');
+        req.options.locals.navlist = fullNames;
       }
       next();
     });
