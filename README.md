@@ -18,9 +18,9 @@ module.exports = {
       storage: 'STORAGE ACCOUNT FOR MEDIA SERVICE', //This is created automatically after you create the media service
       storageSecret: 'STORAGE ACCOUNT SECRET' //look these up in the Storage section of the portal
     },
-    AllowedHostNames: ['*'], //it is not much of a risk to allow any hosts because every locators do have a validity timeout
+    AllowedHostNames: ['*'], //it is not much of a risk to allow any hosts because locator do have a validity timeout
     //Note that these presets are for Media Encoder Standard. They will not work if the encoder is changed
-    EncodingPreset: fs.readFileSync('config/EncPreset.xml', 'ucs2'), //!!!IMPORTANT!!! This is overridden in the bootstrap version.
+    EncodingPreset: fs.readFileSync('config/EncPreset.xml', 'ucs2'), //!!!IMPORTANT!!! This is overridden in the bootstrap function.
     EncoderTaskBody: fs.readFileSync('config/EncTaskBody.xml', 'utf8')
   }
 }
